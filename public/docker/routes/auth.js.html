@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>auth.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "Users/mayukudo/Documents/workspace/app//auth.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>auth.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+<p>Calls Sequelize</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Sequelize</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;sequelize&quot;</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>Access to database</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">sequelize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sequelize</span><span class="p">(</span><span class="s1">&#39;jamjam&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">dialect</span><span class="o">:</span> <span class="s1">&#39;sqlite&#39;</span> 
+    <span class="p">,</span> <span class="nx">storage</span><span class="o">:</span> <span class="s1">&#39;./database/jamjam.db&#39;</span>
+    <span class="p">,</span> <span class="nx">host</span><span class="o">:</span> <span class="s2">&quot;localhost&quot;</span>
+    <span class="p">,</span> <span class="nx">port</span><span class="o">:</span> <span class="mi">3003</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">createNew</span> <span class="o">=</span> <span class="nx">sequelize</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;createNews&#39;</span><span class="p">,</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>First name</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">first</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Sequelize</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span>
+               <span class="nx">validate</span><span class="o">:</span> <span class="p">{</span> <span class="nx">isAlphanumeric</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">notNull</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Last name</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">last</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Sequelize</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span>
+                  <span class="nx">validate</span><span class="o">:</span> <span class="p">{</span> <span class="nx">isAlphanumeric</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">notNull</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Fullname</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">fullname</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Sequelize</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span>
+                  <span class="nx">validate</span><span class="o">:</span> <span class="p">{</span><span class="nx">notNull</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Username has to be unique, meaning, no duplicates</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">username</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Sequelize</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span> <span class="nx">unique</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                  <span class="nx">validate</span><span class="o">:</span> <span class="p">{</span> <span class="nx">isAlphanumeric</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">notNull</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Email</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">email</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Sequelize</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span>
+               <span class="nx">validate</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">isEmail</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">notNull</span><span class="o">:</span> <span class="kc">true</span>  <span class="p">}</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>Password 1</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">password</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Sequelize</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span> 
+                  <span class="nx">validate</span><span class="o">:</span> <span class="p">{</span> <span class="nx">notNull</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>Password 2</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">password2</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Sequelize</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span> 
+                   <span class="nx">validate</span><span class="o">:</span> <span class="p">{</span><span class="nx">notNull</span><span class="o">:</span> <span class="kc">true</span><span class="p">}</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>JamJam</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">jamjam</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Sequelize</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span>
+               <span class="nx">validate</span><span class="o">:</span> <span class="p">{</span> <span class="nx">isAlphanumeric</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">notNull</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">}</span>  
+
+  <span class="p">},{</span>
+    <span class="nx">instanceMethods</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">getFullname</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">first</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">last</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">models</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>Signup form with corresponding variabless</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">signup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">first</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+          <span class="p">,</span> <span class="nx">last</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;last&#39;</span><span class="p">)</span>
+        <span class="p">,</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+        <span class="p">,</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+        <span class="p">,</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+        <span class="p">,</span> <span class="nx">password2</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;password2&#39;</span><span class="p">)</span>
+      <span class="p">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">first</span> <span class="o">||</span> <span class="o">!</span><span class="nx">last</span> <span class="o">||</span> <span class="o">!</span><span class="nx">username</span> <span class="o">||</span> <span class="o">!</span><span class="nx">email</span> <span class="o">||</span> <span class="o">!</span><span class="nx">password</span> <span class="o">||</span> <span class="o">!</span><span class="nx">password2</span><span class="p">){</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;registerError&#39;</span><span class="p">,</span> <span class="s1">&#39;Please fill out everything&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;back&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">password</span> <span class="o">!==</span> <span class="nx">password2</span><span class="p">){</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;registerError&#39;</span><span class="p">,</span> <span class="s1">&#39;Password did not match&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;back&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
+</div>
+<p>Finds if there are any duplicates</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">createNew</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span>
+          <span class="nx">where</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">username</span><span class="o">:</span> <span class="nx">username</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<p>If there are duplicates</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">){</span>
+          <span class="k">if</span><span class="p">(</span><span class="nx">user</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<p>Flashes an error message and redirects to new</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;registerError&#39;</span><span class="p">,</span> <span class="s1">&#39;Username exists&#39;</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;back&#39;</span><span class="p">);</span>
+          <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+</div>
+<p>If there is no duplicates</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+          <span class="k">else</span><span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<p>Create a fullname in a table</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="kd">var</span> <span class="nx">fullname</span> <span class="o">=</span> <span class="nx">createNew</span><span class="p">.</span><span class="nx">build</span><span class="p">({</span>
+              <span class="nx">first</span><span class="o">:</span> <span class="nx">first</span><span class="p">,</span>
+              <span class="nx">last</span><span class="o">:</span> <span class="nx">last</span><span class="p">})</span>
+              <span class="p">.</span><span class="nx">getFullname</span><span class="p">();</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<p>Saves the corresponding info in database
+And creates a new user in database</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+              <span class="nx">createNew</span><span class="p">.</span><span class="nx">build</span><span class="p">({</span>
+                <span class="nx">first</span><span class="o">:</span> <span class="nx">first</span><span class="p">,</span>
+                <span class="nx">last</span><span class="o">:</span> <span class="nx">last</span><span class="p">,</span>
+                <span class="nx">fullname</span><span class="o">:</span> <span class="nx">fullname</span><span class="p">,</span>
+                <span class="nx">username</span><span class="o">:</span> <span class="nx">username</span><span class="p">,</span>
+                <span class="nx">email</span><span class="o">:</span> <span class="nx">email</span><span class="p">,</span>
+                <span class="nx">password</span><span class="o">:</span> <span class="nx">password</span><span class="p">,</span>
+                <span class="nx">password2</span><span class="o">:</span> <span class="nx">password2</span>
+              <span class="p">}).</span><span class="nx">save</span><span class="p">()</span>
+          <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">models</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+</div>
+<p>Delete password so that client cannot see it again / have to retype</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="k">delete</span> <span class="nx">models</span><span class="p">.</span><span class="nx">password</span><span class="p">;</span>
+            <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">models</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+          <span class="p">})</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>Flashes error if there is any internal error</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+          <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;loginError&#39;</span><span class="p">,</span> <span class="s1">&#39;Something is wrong with your database&#39;</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;back&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>Login form</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">login</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+        <span class="p">,</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+       <span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">username</span> <span class="o">||</span> <span class="o">!</span><span class="nx">password</span><span class="p">){</span>
+          <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;loginError&#39;</span><span class="p">,</span> <span class="s1">&#39;Please fill out everything&#39;</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;back&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
+<p>Finds username and password from the database</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">createNew</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span>
+          <span class="nx">where</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">username</span><span class="o">:</span> <span class="nx">username</span><span class="p">,</span>
+            <span class="nx">password</span><span class="o">:</span> <span class="nx">password</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+</div>
+<p>Checks if typed in username and the password matches with stored info</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
+</div>
+<p>If matches, redirects to top/index</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+          <span class="k">if</span><span class="p">(</span><span class="nx">user</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-24" id="section-24">&#182;</a>
+</div>
+<p>Delete password so that client cannot see it again / have to retype</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="k">delete</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">;</span>
+            <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+          <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-25" id="section-25">&#182;</a>
+</div>
+<p>Otherwise, flahses error</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+          <span class="k">else</span><span class="p">{</span>
+            <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;loginError&#39;</span><span class="p">,</span> <span class="s1">&#39;Authentication failed&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;back&#39;</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-26" id="section-26">&#182;</a>
+</div>
+<p>Flashes error if there is any internal error</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+          <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;loginError&#39;</span><span class="p">,</span> <span class="s1">&#39;Something is wrong with your database&#39;</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;back&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-27" id="section-27">&#182;</a>
+</div>
+<p>Logout form which destroys session and redirects to new</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">,</span> <span class="nx">logout</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;new&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

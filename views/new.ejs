@@ -1,0 +1,42 @@
+<div id="auth_form" class="clear">
+  <form id="login" action="/auth/login" method="post" class="box_effect">
+    <h2>Login</h2>
+    <%- message('loginError') %>
+    <div class="inputs">
+      <p><label for="login_username">username</label></p>
+      <p><input id="login_username" type="text" name="username"
+                size="30" placeholder="username"></p>
+      <p><label for="login_password">password</label></p>
+      <p><input id="login_password" type="password" name="password"
+                size="30" placeholder="password"></p>
+      <p><input type="submit" class="newpost" value="login"></p>
+    </div>
+  </form>
+  <form id="register" action="/auth/signup" method="post" class="box_effect">
+    <h2>Create Account</h2>
+    <%- message('registerError') %>
+    <div class="inputs">
+      <p><label for="register_firstname">First name</label>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         <label for="register_lastname">Last name</label></p>
+      <p><input id="register_firstname" type="first" name="first"
+                size="30" placeholder="firstname">
+         <input id="register_lastname" type="last" name="last"
+                size="30" placeholder="lastname">
+     </p>
+      <p><label for="register_username">username</label></p>
+      <p><input id="register_username" type="text" name="username"
+                size="30" placeholder="username"></p>
+      <p><label for="register_email">Email Address</label></p>
+      <p><input id="register_email" type="email" name="email"
+                size="30" placeholder="email"></p>
+      <p><label for="register_password">password</label></p>
+      <p><input id="register_password" type="password" name="password"
+                size="30" placeholder="password"></p>
+      <p><label for="register_password2">Confirm password</label></p>
+      <p><input id="register_password2" type="password" name="password2"
+                size="30" placeholder="confirm password"></p>
+      <p><input type="submit" class="newpost" value="create account"></p>
+    </div>
+  </form>
+</div>

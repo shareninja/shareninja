@@ -1,0 +1,36 @@
+body {
+  padding: 50px;
+  font: Courier, 'Courier New', georgia, serif;
+}
+
+a {
+  color: #bd0059;
+}
+
+.stickyNotes{
+	border: 1px solid #bd0059;
+  	position: absolute;
+  	min-width: 100px;
+	.settings{
+		height: 20px;
+  		text-align: center;
+  		background-color: #e4dfdb;
+		a{
+			display: none;
+  			margin-left: 2px;
+  			color: #999999;
+  			text-decoration: none;
+		}
+		
+	}
+	.text{
+			height:100px;
+	}
+}
+.stickyNotes:hover{
+	.settings{
+		a{
+			display:inline;
+		}
+	}
+}
