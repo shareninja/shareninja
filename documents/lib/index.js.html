@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "Users/mayukudo/Documents/workspace/CS/326/shareninja-master//index.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h3">
+        <a href="#function%3A%20setcookie">function: setCookie</a>
+      </div>
+      <div class="heading h3">
+        <a href="#function%3A%20notfound">function: NotFound</a>
+      </div>
+      <div class="heading h3">
+        <a href="#function%3A%20notfound">function: notFound</a>
+      </div>
+      <div class="heading h3">
+        <a href="#function%3A%20loginrequired">function: loginRequired</a>
+      </div>
+      <div class="heading h3">
+        <a href="#function%3A%20helpers">function: helpers</a>
+      </div>
+      <div class="heading h3">
+        <a href="#function%3A%20dynamichelpers">function: dynamicHelpers</a>
+      </div>
+      <div class="heading h3">
+        <a href="#function%3A%20notfoundhandler">function: notFoundHandler</a>
+      </div>
+      <div class="heading h3">
+        <a href="#function%3A%20errorhandler">function: errorHandler</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>index.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">models</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">models</span><span class="p">.</span><span class="nx">UserModel</span>
+  <span class="p">;</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="function%3A%20setcookie">
+  <h3>
+    <a href="#function%3A%20setcookie" name="function%3A%20setcookie" class="pilcrow">&#182;</a>
+    <em>function</em>: setCookie
+  </h3>
+</div>
+
+
+<div class="dox">
+  <div class="summary"><p>Set cookie for a week in order to avoid loggining in by typing
+ (If the cookie is stored and is matched with the stored data in a database, then the users can log in)</p>
+  </div>
+  <div class="body"><p>@param {object} res The HTTP response
+ @param {object} val Value, which is the cookie called "auth"</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">setCookie</span> <span class="o">=</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">setCookie</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">cookie</span><span class="p">(</span><span class="s1">&#39;authtoken&#39;</span><span class="p">,</span> <span class="nx">val</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+    <span class="nx">expires</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">parallel</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">;</span>
+  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">current</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">fun</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="nx">fun</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="nx">current</span> <span class="o">===</span> <span class="nx">len</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">next</span><span class="p">();</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">fork</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fun</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fun</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <span class="nx">next</span><span class="p">();</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="function%3A%20notfound">
+  <h3>
+    <a href="#function%3A%20notfound" name="function%3A%20notfound" class="pilcrow">&#182;</a>
+    <em>function</em>: NotFound
+  </h3>
+</div>
+
+
+<div class="dox">
+  <div class="summary"><p>To be able to get the path from the view, store stack trace in the error</p>
+  </div>
+  <div class="body"><p>@param {object} path Requested URI</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">function</span> <span class="nx">NotFound</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">Error</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;Not Found&#39;</span><span class="p">);</span>
+  <span class="nb">Error</span><span class="p">.</span><span class="nx">captureStackTrace</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;NotFound&#39;</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="nx">path</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">util</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">NotFound</span><span class="p">,</span> <span class="nb">Error</span><span class="p">);</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">NotFound</span> <span class="o">=</span> <span class="nx">NotFound</span><span class="p">;</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="function%3A%20notfound">
+  <h3>
+    <a href="#function%3A%20notfound" name="function%3A%20notfound" class="pilcrow">&#182;</a>
+    <em>function</em>: notFound
+  </h3>
+</div>
+
+
+<div class="dox">
+  <div class="summary"><p>Handler for NotFound</p>
+  </div>
+  <div class="body"><p>@param {object} host View the requested URL</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">notFound</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="p">(</span><span class="k">new</span> <span class="nx">NotFound</span><span class="p">(</span><span class="nx">host</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">));</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="function%3A%20loginrequired">
+  <h3>
+    <a href="#function%3A%20loginrequired" name="function%3A%20loginrequired" class="pilcrow">&#182;</a>
+    <em>function</em>: loginRequired
+  </h3>
+</div>
+
+
+<div class="dox">
+  <div class="summary"><p>Authentication with a cookie</p>
+  </div>
+  <div class="body"><p>@param {object} req The HTTP request
+ @param {object} res The HTTP response
+ @param {object} next Pass handlers to the next </p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">loginRequired</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">next</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">cookies</span><span class="p">.</span><span class="nx">authtoken</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Redirect to sessions/new if there does't exist session or cookie</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/sessions/new&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>If there is a cookie, use it for the authentication</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">cookies</span><span class="p">.</span><span class="nx">authtoken</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">condition</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">username</span><span class="o">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+    <span class="nx">authcookie</span><span class="o">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">authcookie</span>
+  <span class="p">}</span>
+  <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nx">condition</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>If the cookie didn't match with the stored data, redirect to the sessions/new</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/sessions/new&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">authcookie</span><span class="o">:</span> <span class="nx">models</span><span class="p">.</span><span class="nx">getAuthCookie</span><span class="p">()</span> <span class="p">};</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>Update the cookie</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">User</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">condition</span><span class="p">,</span> <span class="nx">update</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">numAffected</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>Update session</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">newtoken</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">username</span><span class="o">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+        <span class="nx">authcookie</span><span class="o">:</span> <span class="nx">update</span><span class="p">.</span><span class="nx">authcookie</span>
+      <span class="p">};</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>Set the cookie with a new value</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">setCookie</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">newtoken</span><span class="p">));</span>
+      <span class="nx">next</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="function%3A%20helpers">
+  <h3>
+    <a href="#function%3A%20helpers" name="function%3A%20helpers" class="pilcrow">&#182;</a>
+    <em>function</em>: helpers
+  </h3>
+</div>
+
+
+<div class="dox">
+  <div class="summary"><p>View helpers
+ 1. Generate the link from URL and the name
+ 2. Replace spaces with &nbsp; and new lines for with <br /></p>
+  </div>
+  <div class="body"><p>@param {object} req The HTTP request
+ @param {object} res The HTTP response
+ @param {object} next Pass handlers to the next </p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">helpers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">link_to</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">&#39;&lt;a href=&quot;&#39;</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39;&lt;/a&gt;&#39;</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">text_format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/ /g</span><span class="p">,</span> <span class="s1">&#39;&amp;nbsp;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\r\n|\n|\r/g</span><span class="p">,</span> <span class="s1">&#39;&lt;br /&gt;&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="function%3A%20dynamichelpers">
+  <h3>
+    <a href="#function%3A%20dynamichelpers" name="function%3A%20dynamichelpers" class="pilcrow">&#182;</a>
+    <em>function</em>: dynamicHelpers
+  </h3>
+</div>
+
+
+<div class="dox">
+  <div class="summary"><p>Dynamic Helpers for
+ 1. Displaying username on the right corner
+ 2. Send flashes with corresponding messages</p>
+  </div>
+  <div class="body"><p>@param {object} req The HTTP request
+ @param {object} res The HTTP response
+ @param {object} next Pass handlers to the next </p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">dynamicHelpers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">username_or_login</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        <span class="o">+</span> <span class="s1">&#39;&lt;p class=&quot;login_user&quot;&gt;Login as &#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s1">&#39;&lt;/p&gt;&#39;</span>
+        <span class="o">+</span> <span class="s1">&#39;&lt;p class=&quot;logout&quot;&gt;&lt;a href=&quot;/sessions/destroy&quot;&gt;logout&lt;/a&gt;&lt;/p&gt;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="s1">&#39;&lt;p class=&quot;login&quot;&gt;&lt;a href=&quot;/sessions/new&quot;&gt;login&lt;/a&gt;&lt;/p&gt;&#39;</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">message</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">messages</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">messages</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="kd">var</span> <span class="nx">buf</span> <span class="o">=</span> <span class="s1">&#39;&lt;ul class=&quot;message &#39;</span> <span class="o">+</span> <span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&#39;</span><span class="p">;</span>
+      <span class="nx">messages</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">li</span> <span class="o">=</span> <span class="s1">&#39;&lt;li&gt;&#39;</span> <span class="o">+</span> <span class="nx">msg</span> <span class="o">+</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span><span class="p">;</span>
+        <span class="nx">buf</span> <span class="o">+=</span> <span class="nx">li</span><span class="p">;</span>
+      <span class="p">});</span>
+      <span class="nx">buf</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nx">buf</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="function%3A%20notfoundhandler">
+  <h3>
+    <a href="#function%3A%20notfoundhandler" name="function%3A%20notfoundhandler" class="pilcrow">&#182;</a>
+    <em>function</em>: notFoundHandler
+  </h3>
+</div>
+
+
+<div class="dox">
+  <div class="summary"><p>Handler for 404 error status code</p>
+  </div>
+  <div class="body"><p>@param {object} err The 404 error
+ @param {object} req The HTTP request
+ @param {object} res The HTTP response
+ @param {object} next Pass handlers to the next </p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">notFoundHandler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span> <span class="k">instanceof</span> <span class="nx">NotFound</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;err&#39;</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">status</span><span class="o">:</span> <span class="mi">404</span><span class="p">,</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;404 Page Not Found&#39;</span><span class="p">,</span>
+      <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
+    <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="function%3A%20errorhandler">
+  <h3>
+    <a href="#function%3A%20errorhandler" name="function%3A%20errorhandler" class="pilcrow">&#182;</a>
+    <em>function</em>: errorHandler
+  </h3>
+</div>
+
+
+<div class="dox">
+  <div class="summary"><p>Handler for 500 error status code</p>
+  </div>
+  <div class="body"><p>@param {object} err 500 error
+ @param {object} req The HTTP request
+ @param {object} res The HTTP response
+ @param {object} next Pass handlers to the next </p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">errorHandler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;err&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">status</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;500 Internal Server Error&#39;</span><span class="p">,</span>
+    <span class="nx">err</span><span class="o">:</span> <span class="nx">err</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
