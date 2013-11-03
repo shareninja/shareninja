@@ -5,74 +5,84 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , update = require('./routes/new.js')
-  , lib = require('./lib/index.js')
-  , models = require('model')
-  , socketIO = require('socket.io')
-  , flash = require('connect-flash')
-  , auth = require('./routes/auth.js')(models)
+  , models = require('./models')
+  , lib = require('./lib')
+  , RedisStore = require('connect-redis')(express)
   ;
 
 var app = module.exports = express.createServer();
-var io = socketIO.listen(app);
 
 // Configuration
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
+  app.redirect('top', '/topics');
   app.use(express.favicon());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: 'your secret here' }));
+  app.use(lib.parallel(
+    express.bodyParser(),
+    express.cookieParser()
+  ));
+  app.use(lib.parallel(
+    express.methodOverride(),
+    express.session({
+      secret: 'your secret here',
+      store: new RedisStore(),
+      cookie: {
+        maxAge: false
+      }
+    })
+  ));
+  app.use(express.logger({
+    stream: lib.logStream,
+    buffer: 500
+  }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-  app.use(flash());
-  // redirect
+  app.use(lib.notFound('http://node-forum'));
 });
 
-// Routes
-app.get('/', lib.loginRequired, routes.index);
+app.configure('development', function(){
+  models.init('localhost', 'forum_dev');
+});
 
-// Routes for topics
-app.get('/new', update.new);
-app.get('/auth/logout', lib.loginRequired, auth.logout);
-app.get('/auth/login', lib.loginRequired, auth.login);
-app.get('/auth/signup', lib.loginRequired, auth.signup);
+app.configure('production', function(){
+  models.init('localhost', 'forum_prod');
+});
 
-// POST for topics
-app.post('/auth/signup', auth.signup);
-app.post('/auth/login', auth.login);
-app.post('/auth/logout', auth.logout);
+app.configure('test', function() {
+  models.init('localhost', 'forum_test');
+});
 
-// DynamicHelpers
+// View Helper
+app.helpers(lib.helpers);
+
+// Dynamic View Helper
 app.dynamicHelpers(lib.dynamicHelpers);
 
-// Error Handlers
-app.error(lib.errorHandler);
+// Routes
+
+// GET /
+app.get('/', lib.loginRequired, routes.index);
+
+// GET /topics
+app.get('/topics', lib.loginRequired, routes.topics.index);
+
+// POST /users
+app.post('/users', routes.users.create);
+
+// GET /sessions/new
+app.get('/sessions/new', routes.sessions.new);
+
+// GET /sessions/destroy
+app.get('/sessions/destroy', routes.sessions.delete);
+
+// POST /sessions
+app.post('/sessions', routes.sessions.create);
+
+// Error Handler
 app.error(lib.notFoundHandler);
-app.use(lib.notFound('http://NinjaShare'));
+app.error(lib.errorHandler);
 
-
-app.listen(3003);
+app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
-
-
-// ---------- socket.io ------------ //
-io.sockets.on('connection', function(socket){
-  console.log("Connected to socket.io");
-// When received posts
-  socket.on('posts', function(data){
-// Sends data
-  console.log("JamJam has been sent");
-  io.sockets.emit('posts', {value: data.value}); 
-  });
-});
-
-
-
-
-
-
-
