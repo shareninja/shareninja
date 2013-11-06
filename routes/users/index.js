@@ -28,7 +28,7 @@ exports.create = function(req, res, next) {
       if (err.code === 11000) {
     // If username already exists in a database / duplicated username exists
         req.flash('registerErr', 'The username you selected already exists.');
-        req.flash('registerErr', 'Please choose a different username.');
+        req.flash('registerErr', 'Please choose the different one.');
         return res.redirect('back');
       }
       if (err.name === 'ValidationError') {

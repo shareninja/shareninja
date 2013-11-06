@@ -54,7 +54,7 @@ textarea {
 }
 
 a {
-  color: #bd0059;
+  color: #0093bd;
   text-decoration: none;
 }
 
@@ -73,8 +73,8 @@ a:active {
 
 .box_effect {
   border-radius: 10px;
-  border: 1px solid #bd0059;
-  box-shadow: 0px 0px 4px #bd0059;
+  border: 1px solid #0093bd;
+  box-shadow: 0px 0px 4px #0093bd;
 }
 
 header {
@@ -106,7 +106,7 @@ header .logout {
 
 header .login a,
 header .logout a{
-  color: #bd0059;
+  color: #0093bd;
 }
 
 header nav {
@@ -128,7 +128,7 @@ header nav ul li {
 header nav ul li a{
   font-weight: bold;
   display: block;
-  color: #bd0059;
+  color: #0093bd;
 }
 
 #contents {
@@ -144,7 +144,7 @@ header nav ul li a{
 
 h2,
 h2 a {
-  color: #bd0059;
+  color: #0093bd;
   margin: 0 0 2% 0;
 }
 
@@ -234,7 +234,7 @@ h2 a {
 }
 
 #topic_list li{
-  border:solid 4px #bd0059;
+  border:solid 4px #0093bd;
   border-radius: 10px;
 }
 
@@ -252,25 +252,7 @@ ul.message {
 ul.message li {
   padding: 1%;
   margin: 1% 0 0 0;
-  border: solid 4px #bd0059;
-  background: #eecccc;
+  border: solid 4px #0093bd;
+  background: #a9ecff;
   border-radius: 10px;
-}
-
-
-#following {
-  padding: 2%;
-}
-
-#following form {
-  margin: 1%;
-  padding: 2%;
-}
-
-#following form div.inputs {
-  margin-left: 4%;
-}
-
-#following form div.inputs li{
-  
 }

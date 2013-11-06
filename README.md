@@ -1,4 +1,4 @@
-##CS326 NinjaShare
+##CS326 Share Ninja
 Emily Henriksen, Nick Hirakawa, Davit Itkin, Mayu Kudo, Chris Paika
 ----------
 + app.js -> File to execute the application
