@@ -51,6 +51,36 @@ exports.create = function(req, res, next) {
       lib.setCookie(res, JSON.stringify(newtoken));
     }
     req.session.username = result.username;
-    res.redirect('top');
+    res.redirect('/topics');
   });
 };
+
+// ### *function*: delete
+/**
+ *  Delete a user from database
+ *
+ *  @param {object} req The HTTP request
+ *  @param {object} res The HTTP response
+ *  @param {object} next Pass handlers to the next 
+ */
+exports.delete = function(req, res, next) {
+  var condition = {
+    username: req.session.username
+  };
+  User.remove(condition, function(err, result) {
+    if (err) {
+      return next(err);
+    }
+    if (result === 0) {
+      // When nothing has deleted
+      req.flash('deleteErr', 'Can\'t delete this user');
+      return res.redirect('back');
+    }
+    req.session.destroy();
+    res.clearCookie('authtoken', { path: '/' });
+    res.redirect('/sessions/thankyou');
+  });
+};
+
+
+
