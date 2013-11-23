@@ -28,7 +28,7 @@ UserSchema.methods.setPassword = function(password, password2) {
     this.password = password;
     return true;
   }
-  this.invalidate('password_mismatch', new Error('Password mismatch'));
+  this.invalidate('password_mismatch', new Error('Password mismatched'));
   return false;
 };
 

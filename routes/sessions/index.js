@@ -48,7 +48,7 @@ exports.create = function(req, res) {
       lib.setCookie(res, JSON.stringify(newtoken));
     }
     req.session.username = result.username;
-    res.redirect('top');
+    res.redirect('/topics');
   });
 };
 
