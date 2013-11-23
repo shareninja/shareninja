@@ -8,6 +8,7 @@ var express = require('express')
   , models = require('./models')
   , lib = require('./lib')
   , RedisStore = require('connect-redis')(express)
+	, file = require('./routes/file')
   , index = require('./routes/topics/index.js')
   , profile = require('./routes/topics/profile.js')
   , users = require('./routes/users/index.js')
@@ -105,9 +106,14 @@ app.post('/lib', change.checkOldPassword);
 // POST /topics/changeToNewPassword
 app.post('/newPass/changeToNewPassword', confirm.changeToNewPassword);
 
+app.get('/upload', file.upload);
+app.post('/upload', file.post);
+
+app.get('/download/:file', file.download);
+
 // Error Handler
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 
 app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);
