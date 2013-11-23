@@ -8,9 +8,7 @@ var express = require('express')
   , models = require('./models')
   , lib = require('./lib')
   , RedisStore = require('connect-redis')(express)
-<<<<<<< HEAD
-	, file = require('./routes/file');
-=======
+	, file = require('./routes/file')
   , index = require('./routes/topics/index.js')
   , profile = require('./routes/topics/profile.js')
   , users = require('./routes/users/index.js')
@@ -18,7 +16,6 @@ var express = require('express')
   , thankyou = require('./routes/sessions/thankyou.js')
   , change =require('./routes/lib/index.js')
   , confirm = require('./routes/newPass/index.js')
->>>>>>> 883109216d2f32e38b3660dbe3b4698f795388df
   ;
 
 var app = module.exports = express.createServer();
