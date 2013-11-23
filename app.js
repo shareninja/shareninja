@@ -8,6 +8,7 @@ var express = require('express')
   , models = require('./models')
   , lib = require('./lib')
   , RedisStore = require('connect-redis')(express)
+	, file = require('./routes/file');
   ;
 
 var app = module.exports = express.createServer();
@@ -80,9 +81,14 @@ app.get('/sessions/destroy', routes.sessions.delete);
 // POST /sessions
 app.post('/sessions', routes.sessions.create);
 
+app.get('/upload', file.upload);
+app.post('/upload', file.post);
+
+app.get('/download/:file', file.download);
+
 // Error Handler
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 
 app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);
