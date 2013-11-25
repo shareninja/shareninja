@@ -16,11 +16,11 @@ var express = require('express')
   , thankyou = require('./routes/sessions/thankyou.js')
   , change =require('./routes/lib/index.js')
   , confirm = require('./routes/newPass/index.js')
-  , userSearch = require('./routes/userSearch/index.js')
+  , io = require('socket.io')
   ;
 
 var app = module.exports = express.createServer();
-io = require('socket.io').listen(app);
+
 // Configuration
 
 app.configure(function(){
@@ -88,14 +88,15 @@ app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.changeToNewPa
 // GET /sessions/new
 app.get('/sessions/new', sessions.new);
 
+//GET /userSearch
+app.get('/userSearch', userSearch.show);
+
 // GET /sessions/thankyou
 app.get('/sessions/thankyou', thankyou.show);
 
 // GET /sessions/destroy
 app.get('/sessions/destroy', sessions.delete);
 
-//GET /userSearch
-app.get('/userSearch', userSearch.show);
 
 // POST /sessions
 app.post('/sessions', sessions.create);
@@ -114,22 +115,15 @@ app.post('/upload', file.post);
 
 app.get('/download/:file', file.download);
 
-app.get('/index', function (req, res) {
-  res.sendfile('public/index.html');
-});
-
 // Error Handler
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 
-app.listen(3000);
-
 io.sockets.on('connection', function (socket) {
     console.log('A new user connected!');
-    socket.emit('notify', { msg: 'notification type' });
-	socket.on('reply', function(data){
-		console.log(data);
-	});
+    socket.emit('notify', { : 'notification type' });
 });
 
+app.listen(3000);
+io.listen(app);
 console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);
