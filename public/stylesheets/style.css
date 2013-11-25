@@ -34,14 +34,14 @@ li {
   list-style: none;
 }
 
-input[type=submit],
+/*input[type=submit],
 input[type=button] {
   font-size: 80%;
   background: #dadada;
   border: 1px solid #999999;
   padding: 0.4em;
   border-radius: 5px;
-}
+}*/
 
 input[type=text],
 input[type=first],

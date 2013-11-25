@@ -8,6 +8,14 @@ var express = require('express')
   , models = require('./models')
   , lib = require('./lib')
   , RedisStore = require('connect-redis')(express)
+	, file = require('./routes/file')
+  , index = require('./routes/topics/index.js')
+  , profile = require('./routes/topics/profile.js')
+  , users = require('./routes/users/index.js')
+  , sessions = require('./routes/sessions/index.js')
+  , thankyou = require('./routes/sessions/thankyou.js')
+  , change =require('./routes/lib/index.js')
+  , confirm = require('./routes/newPass/index.js')
   ;
 
 var app = module.exports = express.createServer();
@@ -17,7 +25,7 @@ var app = module.exports = express.createServer();
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
-  app.redirect('top', '/topics');
+  // app.redirect('top', '/topics');
   app.use(express.favicon());
   app.use(lib.parallel(
     express.bodyParser(),
@@ -39,7 +47,7 @@ app.configure(function(){
   }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-  app.use(lib.notFound('http://node-forum'));
+  app.use(lib.notFound('http://share-ninja'));
 });
 
 app.configure('development', function(){
@@ -66,23 +74,46 @@ app.dynamicHelpers(lib.dynamicHelpers);
 app.get('/', lib.loginRequired, routes.index);
 
 // GET /topics
-app.get('/topics', lib.loginRequired, routes.topics.index);
+app.get('/topics', lib.loginRequired, index.show);
 
-// POST /users
-app.post('/users', routes.users.create);
+// GET /topics
+app.get('/topics/profile', lib.loginRequired, profile.show);
+
+// GET /topics/changePassword
+app.get('/lib/changePassword', lib.loginRequired, change.changePassword);
+
+app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.changeToNewPassword);
 
 // GET /sessions/new
-app.get('/sessions/new', routes.sessions.new);
+app.get('/sessions/new', sessions.new);
+
+// GET /sessions/thankyou
+app.get('/sessions/thankyou', thankyou.show);
 
 // GET /sessions/destroy
-app.get('/sessions/destroy', routes.sessions.delete);
+app.get('/sessions/destroy', sessions.delete);
+
 
 // POST /sessions
-app.post('/sessions', routes.sessions.create);
+app.post('/sessions', sessions.create);
+
+// POST /users
+app.post('/users', users.create);
+
+// POST /lib
+app.post('/lib', change.checkOldPassword);
+
+// POST /topics/changeToNewPassword
+app.post('/newPass/changeToNewPassword', confirm.changeToNewPassword);
+
+app.get('/upload', file.upload);
+app.post('/upload', file.post);
+
+app.get('/download/:file', file.download);
 
 // Error Handler
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 
 app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);
