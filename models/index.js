@@ -20,7 +20,9 @@ var UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   authcookie: { type: String, required: true, default: getAuthCookie },
-  created_at: { type: Date, default: Date.now }
+  created_at: { type: Date, default: Date.now },
+  friendsList: {type: [String], required: true, default: []},
+  friendCount: {type: Number, required: true, default: 0}
 });
 
 UserSchema.methods.setPassword = function(password, password2) {
@@ -31,5 +33,21 @@ UserSchema.methods.setPassword = function(password, password2) {
   this.invalidate('password_mismatch', new Error('Password mismatched'));
   return false;
 };
-
+/*
+*  Adds a friend to the user's friend list.
+   TODO: make it so when a friend is added a notification is created, and the other friends the other
+   TODO:  Maybe make a friend request system? Blech
+*/
+UserSchema.methods.addfriend = function(user){
+	//first check if user being added is in database
+	this.findOne({ username: user}, function(err, results){
+		//TODO put error handling here
+	});
+	if(this.friendCount == 100)
+	{
+		//TODO: Too many friends, stop this from happening
+	}
+	friendCount++;
+	this.friendsList[friendCount] = user;
+}
 exports.UserModel = mongoose.model('User', UserSchema);
