@@ -19,7 +19,7 @@ var express = require('express')
   ;
 
 var app = module.exports = express.createServer();
-
+io = require('socket.io').listen(app);
 // Configuration
 
 app.configure(function(){
@@ -111,9 +111,22 @@ app.post('/upload', file.post);
 
 app.get('/download/:file', file.download);
 
+app.get('/index', function (req, res) {
+  res.sendfile('public/index.html');
+});
+
 // Error Handler
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 
 app.listen(3000);
+
+io.sockets.on('connection', function (socket) {
+    console.log('A new user connected!');
+    socket.emit('notify', { msg: 'notification type' });
+	socket.on('reply', function(data){
+		console.log(data);
+	});
+});
+
 console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);
