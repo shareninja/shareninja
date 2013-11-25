@@ -121,7 +121,7 @@ app.error(lib.errorHandler);
 
 io.sockets.on('connection', function (socket) {
     console.log('A new user connected!');
-    socket.emit('notify', { : 'notification type' });
+    socket.emit('notify', {notification : 'notification type' });
 });
 
 app.listen(3000);
