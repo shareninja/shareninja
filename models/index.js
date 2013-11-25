@@ -21,7 +21,7 @@ var UserSchema = new Schema({
   password: { type: String, required: true },
   authcookie: { type: String, required: true, default: getAuthCookie },
   created_at: { type: Date, default: Date.now },
-  friendsList: {type: [String], required: true, default: []},
+  friendsList: {type: [String], default: []}, //TODO: make this required...
   friendCount: {type: Number, required: true, default: 0}
 });
 
