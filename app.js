@@ -16,7 +16,7 @@ var express = require('express')
   , thankyou = require('./routes/sessions/thankyou.js')
   , change =require('./routes/lib/index.js')
   , confirm = require('./routes/newPass/index.js')
-  , userSearch = require('routes/userSearch/index.js')
+  , userSearch = require('./routes/userSearch/index.js')
   ;
 
 var app = module.exports = express.createServer();
