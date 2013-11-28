@@ -16,7 +16,9 @@ var express = require('express')
   , thankyou = require('./routes/sessions/thankyou.js')
   , change =require('./routes/lib/index.js')
   , confirm = require('./routes/newPass/index.js')
-  , io = require('socket.io')
+  , socket_io = require('socket.io')
+  , userSearch = require('./routes/userSearch/index.js')
+  , http = require('http')
   ;
 
 var app = module.exports = express.createServer();
@@ -119,11 +121,14 @@ app.get('/download/:file', file.download);
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 
+app.listen(3000);
+var io = socket_io.listen(app);
+
 io.sockets.on('connection', function (socket) {
     console.log('A new user connected!');
     socket.emit('notify', {notification : 'notification type' });
 });
 
-app.listen(3000);
-io.listen(app);
+
+
 console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);
