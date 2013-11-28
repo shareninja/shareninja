@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -7,7 +8,7 @@ var express = require('express')
   , models = require('./models')
   , lib = require('./lib')
   , RedisStore = require('connect-redis')(express)
-        , file = require('./routes/file')
+	, file = require('./routes/file')
   , index = require('./routes/topics/index.js')
   , profile = require('./routes/topics/profile.js')
   , users = require('./routes/users/index.js')
