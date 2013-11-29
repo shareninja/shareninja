@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Share Ninja: <%= title %></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script type="text/javascript" src="/javascripts/dropDown.js"></script>
   </head>
   <body>
     <div id="wrap" class="box_effect">
@@ -13,13 +14,19 @@
           <div id="side">
             <%- username_or_login %>
           </div>
-        </div>
-        <nav>
-          <ul class="clear">
-            <li><a href="/topics">Top</a></li>
-            <li><a href="/topics/profile">Profile</a></li>
-          </ul>
-        </nav>
+          <div id="dropdown">
+              <dt id="m1-ddheader" onmouseover="ddMenu('m1',1)" onmouseout="ddMenu('m1',-1)">MENU</dt>
+              <dd id="m1-ddcontent" onmouseover="cancelHide('m1')" onmouseout="ddMenu('m1',-1)">
+                <ul>
+                    <li><a href="/topics/profile">PROFILE</a></li>
+                    <li><a href="file">UPLOAD</a></li>
+                    <li><a href="user">FRIENDS</a></li>
+                    <li><a href="notifications">NOTIFICATIONS</a></li>
+                </ul>
+              </dd>
+            </div>
+
+      </div>
       </header>
       <%- body %>
     </div>
