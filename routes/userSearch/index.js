@@ -10,11 +10,8 @@ exports.show = function(req, res, next)
 	//User.find(function (err, users) {
 	//console.log(users);
 	//console.log("END OF TEST DATA");
-<<<<<<< HEAD
-	})
-=======
+	//})
 	// })
->>>>>>> 6ecc2e428f4de96ffb127ff80becf973be08f2a8
 	res.render('userSearch/userSearch', {
     title: 'Add a friend'
   });
