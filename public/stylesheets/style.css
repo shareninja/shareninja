@@ -12,9 +12,8 @@ body {
   margin: 1px 0;
 }
 
-<<<<<<< HEAD
-.nav ul ul {
-=======
+
+.nav ul ul {}
 #dropdown {
   position: relative;
   left: 820px;
@@ -140,7 +139,7 @@ body {
 .nav ul li ul{position:absolute; top:30px; left:0px; }
 =======
 .nav ul li ul{position:absolute; top:30px; left:0px; }*/
->>>>>>> 6ecc2e428f4de96ffb127ff80becf973be08f2a8
+
 
 #main_wrap { 
     display: table;
