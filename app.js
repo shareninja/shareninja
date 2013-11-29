@@ -8,6 +8,7 @@ var express = require('express')
   , models = require('./models')
   , lib = require('./lib')
   , RedisStore = require('connect-redis')(express)
+	, file = require('./routes/file')
   , index = require('./routes/topics/index.js')
   , profile = require('./routes/topics/profile.js')
   , users = require('./routes/users/index.js')
@@ -15,6 +16,9 @@ var express = require('express')
   , thankyou = require('./routes/sessions/thankyou.js')
   , change =require('./routes/lib/index.js')
   , confirm = require('./routes/newPass/index.js')
+  , socket_io = require('socket.io')
+  , userSearch = require('./routes/userSearch/index.js')
+  , http = require('http')
   ;
 
 var app = module.exports = express.createServer();
@@ -86,6 +90,9 @@ app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.changeToNewPa
 // GET /sessions/new
 app.get('/sessions/new', sessions.new);
 
+//GET /userSearch
+app.get('/userSearch', userSearch.show);
+
 // GET /sessions/thankyou
 app.get('/sessions/thankyou', thankyou.show);
 
@@ -105,9 +112,23 @@ app.post('/lib', change.checkOldPassword);
 // POST /topics/changeToNewPassword
 app.post('/newPass/changeToNewPassword', confirm.changeToNewPassword);
 
+app.get('/upload', file.upload);
+app.post('/upload', file.post);
+
+app.get('/download/:file', file.download);
+
 // Error Handler
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 
 app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+var io = socket_io.listen(app);
+
+io.sockets.on('connection', function (socket) {
+    console.log('A new user connected!');
+    socket.emit('notify', {notification : 'notification type' });
+});
+
+
+
+console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);

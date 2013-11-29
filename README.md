@@ -1,5 +1,5 @@
 ##CS326 Share Ninja
-Emily Henriksen, Nick Hirakawa, Davit Itkin, Mayu Kudo, Chris Paika
+Emily Henriksen, Nick Hirakawa, David Itkin, Mayu Kudo, Christopher B. Paika
 ----------
 + app.js -> File to execute the application
 documents/
