@@ -1,6 +1,5 @@
 var models = require('../../models')
   , lib = require('../../lib')
-  ,  = models.NotificationModel
   ;
 
 
@@ -10,7 +9,7 @@ var models = require('../../models')
 */
 
 exports.show = function(req, res) {
-  res.render('/notifications', {
+  res.render('/notifications/display', {
     title: 'Notifications'
   });
 };

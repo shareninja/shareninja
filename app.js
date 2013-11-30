@@ -18,6 +18,7 @@ var express = require('express')
   , confirm = require('./routes/newPass/index.js')
   , socket_io = require('socket.io')
   , userSearch = require('./routes/userSearch/index.js')
+  , notifications = require('./routes/notifications/index.js')
   , http = require('http')
   ;
 
@@ -89,6 +90,9 @@ app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.changeToNewPa
 
 // GET /sessions/new
 app.get('/sessions/new', sessions.new);
+
+//GET /notifications
+app.get('/notifications', lib.loginRequired, index.show);
 
 //GET /userSearch
 app.get('/userSearch', userSearch.show);
