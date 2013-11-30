@@ -9,7 +9,7 @@ var models = require('../../models')
 */
 
 exports.show = function(req, res) {
-  res.render('/notifications/display', {
+  res.render('notifications/display', {
     title: 'Notifications'
   });
 };

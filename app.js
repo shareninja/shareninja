@@ -92,7 +92,7 @@ app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.changeToNewPa
 app.get('/sessions/new', sessions.new);
 
 //GET /notifications
-app.get('/notifications', lib.loginRequired, index.show);
+app.get('/notifications', lib.loginRequired, notifications.show);
 
 //GET /userSearch
 app.get('/userSearch', userSearch.show);
