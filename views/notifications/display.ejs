@@ -1,11 +1,22 @@
 <html>
-
 <body>
 <h1 style = font-size:30px>
 <%= title %>
 </h1>
 <script src = '/socket.io/socket.io.js'></script>
-<script src = '/public/javascripts/client.js'></script>
+<script> 
+  var socket = io.connect();
+  socket.on('connect', function(data) {
+	console.log('hello');
+  });
+  socket.on('notify', function (data) {
+    socket.emit('reply', { type: 'NOTIFY' });
+  });
+  socket.on('notifyknow', function (data) {
+	alert(data.NOTIFICATION);
+  });
+</script>
+
 <ul>
 	<% for(var i=0; i<Notifications.length; i++) { %>
         <li>
@@ -16,7 +27,6 @@
     <% } %>
 </ul>
 </body>
-
 </html>
 
 
