@@ -20,6 +20,7 @@ var express = require('express')
   , userSearch = require('./routes/userSearch/index.js')
   , notifications = require('./routes/notifications/index.js')
   , http = require('http')
+  , iohelp = require('./serverio/index.js')
   ;
 
 var app = module.exports = express.createServer();
@@ -129,8 +130,7 @@ app.listen(3000);
 var io = socket_io.listen(app);
 
 io.sockets.on('connection', function (socket) {
-    console.log('A new user connected!');
-    socket.emit('notify', {notification : 'notification type' });
+    iohelp.notify(socket);
 });
 
 
