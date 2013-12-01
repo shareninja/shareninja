@@ -1,8 +1,9 @@
 exports.notify = function(socket){
 	 console.log('A new user connected!');
-	 socket.on('notify', function(data){
-		socket.emit('notify', { type : data });
-	});
+	 socket.emit('notify', {notification : 'notification type' });
+	socket.on('reply', function(data){
+		console.log(data);
+		});
 };
 
 

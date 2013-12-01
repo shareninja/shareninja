@@ -1,11 +1,19 @@
 <html>
-<head>
-<title>NOTIFICATIONS:</title>
-</head>
 
 <body>
+<h1 style = font-size:30px>
+<%= title %>
+</h1>
+<script src = '/socket.io/socket.io.js'></script>
+<script src = '/public/javascripts/client.js'></script>
 <ul>
-<li>time: now, type: friend request</li>
+	<% for(var i=0; i<Notifications.length; i++) { %>
+        <li>
+            *<a href='Notifications/<%= Notifications[i] %>'>
+                <%= Notifications[i] %>
+            </a>
+        </li>
+    <% } %>
 </ul>
 </body>
 

@@ -1,5 +1,6 @@
 var models = require('../../models')
   , lib = require('../../lib')
+  , NotifModel = models.NotifModel
   ;
 
 
@@ -10,7 +11,10 @@ var models = require('../../models')
 
 exports.show = function(req, res) {
   res.render('notifications/display', {
-    title: 'Notifications'
+    title: 'Notifications',
+	Notifications: ['nick uploaded a file', 
+	'david sent a friend request', 
+	'emily added you to group: work']
   });
 };
 
