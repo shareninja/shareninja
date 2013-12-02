@@ -87,7 +87,7 @@ app.get('/topics/profile', lib.loginRequired, profile.show);
 // GET /topics/changePassword
 app.get('/lib/changePassword', lib.loginRequired, change.changePassword);
 
-app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.changeToNewPassword);
+app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.showPass);
 
 // GET /sessions/new
 app.get('/sessions/new', sessions.new);
@@ -114,8 +114,8 @@ app.post('/users', users.create);
 // POST /lib
 app.post('/lib', change.checkOldPassword);
 
-// POST /topics/changeToNewPassword
-app.post('/newPass/changeToNewPassword', confirm.changeToNewPassword);
+// POST /newPass
+app.post('/newPass', confirm.changeToNewPassword);
 
 app.get('/upload', file.upload);
 app.post('/upload', file.post);

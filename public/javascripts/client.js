@@ -4,5 +4,5 @@ var socket = io.connect();
 
 socket.on('notify', function (data) {
 	console.log(data);
-	socket.emit('reply', data:'yo');
+	socket.emit('reply', {data:'yo'});
 });
