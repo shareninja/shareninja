@@ -18,6 +18,7 @@ var express = require('express')
   , confirm = require('./routes/newPass/index.js')
   , socket_io = require('socket.io')
   , userSearch = require('./routes/userSearch/index.js')
+  , notifications = require('./routes/notifications/index.js')
   , http = require('http')
   ;
 
@@ -85,10 +86,13 @@ app.get('/topics/profile', lib.loginRequired, profile.show);
 // GET /topics/changePassword
 app.get('/lib/changePassword', lib.loginRequired, change.changePassword);
 
-app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.changeToNewPassword);
+app.get('/newPass/changeToNewPassword', lib.loginRequired, confirm.showPass);
 
 // GET /sessions/new
 app.get('/sessions/new', sessions.new);
+
+//GET /notifications
+app.get('/notifications', lib.loginRequired, notifications.show);
 
 //GET /userSearch
 app.get('/userSearch', userSearch.show);
@@ -109,8 +113,8 @@ app.post('/users', users.create);
 // POST /lib
 app.post('/lib', change.checkOldPassword);
 
-// POST /topics/changeToNewPassword
-app.post('/newPass/changeToNewPassword', confirm.changeToNewPassword);
+// POST /newPass
+app.post('/newPass', confirm.changeToNewPassword);
 
 app.get('/upload', file.upload);
 app.post('/upload', file.post);

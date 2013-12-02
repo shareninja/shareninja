@@ -12,6 +12,8 @@ body {
   margin: 1px 0;
 }
 
+
+.nav ul ul {}
 #dropdown {
   position: relative;
   left: 820px;
@@ -81,14 +83,18 @@ body {
 
 /*.nav ul ul {
   display:none;
+
+#main_wrap { 
+    display: table;
 }
 
-.nav ul li:hover > ul{
-  display:block;
+#files_and_lists{
+  display: inline-table;
+  background-position: relative;
 }
 
-.nav ul {
-  padding: 0 20px;
+.friends_groups_list { 
+  padding: 50 20px;
   border-radius: 10px;
   list-style: none;
   position: relative;
@@ -130,6 +136,7 @@ body {
 .nav ul li{position:relative;}
 .nav ul li ul{position:absolute; top:30px; left:0px; }*/
 
+
 #main_wrap { 
     display: table;
 }
@@ -138,67 +145,59 @@ body {
     display: table;
     width: 200px;
     border: solid 1px blue;
-}
-
-#sidebar {
-    background:#CCFFFF;
-    border: solid 10px blue;
-    min-width: 2px;
-    display: table-row-group;
-}
-
-
-#content {
-    background:white;
-    display: table-row-group;
-    width: 100%;
-}
-
-#group_wrap { 
-    display: table;
-    width: 200px;
-    border: solid 1px blue;
-}
-
-#sidebar2 {
-    background:#CCFFFF;
-    border: solid 10px blue;
-    min-width: 2px;
-    display: table-row;
-}
-
-
-#content2 {
-    background:white;
-    display: table-row;
-    width: 100%;
-}
-
-#fileImage{
+  left: 20px;
+  top: 5px;
   display: table;
+  width: 200px;
+  float: left;
+  border: solid 1px blue;
+}
+
+#Title {
+    background:#CCFFFF;
+    min-width: 2px;
+    font-weight: bold;
+    text-decoration: underline;
+    display: table-row-group;
+
+}
+
+#list_content {
+    background:white;
+    display: table-row-group;
+    width: 100%;
+
+}
+
+#blankSpace{
+    background:white;
+    color: white;
+    display: table-row-group;
+    width: 100%;
+
+}
+
+.fileImage{
+  display: table;
+  background-position: center;
   margin-left: 300px;
+  position: absolute;
 }
 
 #firstFile{
-  background-image: url("fileFolder.jpg");
-  background-repeat: no-repeat;
-  background-position: left top;
-  margin-top: 200px;
-  margin-left: 250px;
-  width: 100px;
-  height: 100px;
+  text-indent: 25px;
+  display: table-cell;
+}
+
+#blank{
+  color: white;
   display: table-cell;
 }
 
 #secondFile{  
-  background-image: url("/images/fileFolder.jpg");
-  background-repeat: no-repeat;
-  background-position: left top;
-  margin-top: 200px;
-  margin-left: 250px;
-  width: 100px;
-  height: 100px;
+  text-indent: 25px;
   display: table-cell;}
+
 
 #wrap {
   width: 940px;
