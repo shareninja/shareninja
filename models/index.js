@@ -33,6 +33,8 @@ UserSchema.methods.setPassword = function(password, password2) {
   this.invalidate('password_mismatch', new Error('Password mismatched'));
   return false;
 };
+
+
 /*
 *  Adds a friend to the user's friend list.
    TODO: make it so when a friend is added a notification is created, and the other friends the other
