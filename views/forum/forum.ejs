@@ -3,11 +3,60 @@
     <h1>Message Board</h1>
   </p>
   <div id="contents" class="clear">
+  <form id="login" action="/userSearch/addFriend.js" method="post" class="box_effect">
+      <%- message('passError') %>
+      <div class="inputs">
+        <p><label for="add_friend">Post message below</label></p>
+        <p><input id="add_friend" type="text" name="username"
+                  size="30" placeholder="Message"></p>
+        <p><input type="submit" class="newpost" value="Post Message"><script</p>
+      </div>
+  </form>
+  <br>
   <section class="box_effect">
+	
       <div>
-        <p><label for="input_title"><%= title %></label></p>
+        <p><strong>From: Nick Hirakawa</strong></p>
+		<p><strong>Posted At: Nov. 2, 2013: 2:30 PM</strong></p>
+		<p>The code in the .zip file I uploaded is finalized, feel free to download and use it</p>
       </div>
   </section>
+  <section class="box_effect">
+      <div>
+        <p><strong>From: Chris Paika</strong></p>
+		<p><strong>Posted At: Nov. 2, 2013: 2:30 PM</strong></p>
+		<p>Hey guys what's the status with the sharenjinja.zip file on Nick Hirakawa's profile is it finalized?</p>
+      </div>
+  </section>
+  <section class="box_effect">
+      <div>
+        <p><strong>From: David Itkin</strong></p>
+		<p><strong>Posted At: Nov. 1, 2013: 6:40 PM</strong></p>
+		<p>Just uploaded a picture of our coding session last night check it out guys it's so cool!</p>
+      </div>
+  </section>
+  <section class="box_effect">
+      <div>
+        <p><strong>From: Emily Henricksen</strong></p>
+		<p><strong>Posted At: Oct, 30 2013, 2013: 1:45 PM</strong></p>
+		<p>That coding session was awful...anyone have a picture of it for my Facebook profile picture? I really want it cause I'm super cool</p>
+      </div>
+  </section>
+  <section class="box_effect">
+      <div>
+        <p><strong>From: Nick Hirakawa</strong></p>
+		<p><strong>Posted At: Oct, 29 2013, 2013: 2:13 PM</strong></p>
+		<p>I can meet for a coding session tomorrow if you guys can</p>
+      </div>
+  </section>
+  <section class="box_effect">
+      <div>
+        <p><strong>From: Chris Paika</strong></p>
+		<p><strong>Posted At: Oct, 27 2013, 2013: 1:45 PM</strong></p>
+		<p>Coding session 3 days from now anyone?  Also just uploaded the ejs templates for our software, Nick feel free to pull them to get a start on the code</p>
+      </div>
+  </section>
+  <p>See more forum posts</p>
   <p class="move_top"><a href="#wrap">move top</a></p>
   </div>
 </div>
