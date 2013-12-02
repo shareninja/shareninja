@@ -16,19 +16,16 @@
 	alert(data.NOTIFICATION);
   });
 </script>
+<p>
 
+</p>
 <ul>
 	<% for(var i=0; i<Notifications.length; i++) { %>
         <li>
-            *<a href='Notifications/<%= Notifications[i] %>'>
-                <%= Notifications[i] %>
-            </a>
+            <p>*<%= Notifications[i] %> </p>  
         </li>
     <% } %>
 </ul>
 </body>
 </html>
 
-
-
-      
