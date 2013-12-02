@@ -1,13 +1,28 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/javascripts/upload.js"></script>
+	<script src ="/socket.io/socket.io.js"></script>
 </head>
 <body>
 <form action="/upload" enctype="multipart/form-data" method="post">
     <input type="file" name="user_file"/>
     <input type="submit" value="Upload"/>
+	
+	<script>
+		var socket = io.connect();
+		socket.on('connect', function(data) {
+			console.log(data);
+		});
+		socket.on('notify', function (data) {
+			socket.emit('reply', { type:'UPLOAD' });
+		});
+		socket.on('notifyknow', function (data) {
+		});
+		
+	</script>
 </form>
 <div id="picker">
     <select name="share" id="friend_chooser" multiple="multiple">

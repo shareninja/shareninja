@@ -2,13 +2,12 @@
 /**
  * Module dependencies.
  */
-
 var express = require('express')
   , routes = require('./routes')
   , models = require('./models')
   , lib = require('./lib')
   , RedisStore = require('connect-redis')(express)
-	, file = require('./routes/file')
+  , file = require('./routes/file')
   , index = require('./routes/topics/index.js')
   , profile = require('./routes/topics/profile.js')
   , users = require('./routes/users/index.js')
@@ -21,8 +20,9 @@ var express = require('express')
   , forum = require('./routes/forum/forum.js')
   , notifications = require('./routes/notifications/index.js')
   , http = require('http')
+  , iohelp = require('./serverio/index.js')
+  , Notification = models.NotifModel
   ;
-
 var app = module.exports = express.createServer();
 
 // Configuration
@@ -128,15 +128,26 @@ app.get('/download/:file', file.download);
 // Error Handler
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
-
 app.listen(3000);
 var io = socket_io.listen(app);
 
 io.sockets.on('connection', function (socket) {
-    console.log('A new user connected!');
-    socket.emit('notify', {notification : 'notification type' });
+    socket.emit('notify', {message:'notification'});
+	socket.on('reply', function(data){ 
+		if(data.type == 'UPLOAD'){
+			socket.broadcast.emit('notifyknow',{NOTIFICATION: 'FILE HAS BEEN UPLOADED!'});
+			socket.emit('notifyknow',{NOTIFICATION: 'FILE HAS BEEN UPLOADED!'});
+			var notification = new Notification({
+				username: 'dave',
+				type:'UPLOAD',
+				group : Math.floor((Math.random()*10)+1)
+			});
+			//notification.save();	
+		}
+		if(data.type == 'NOTIFY'){
+			socket.broadcast.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
+			socket.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
+		}
+	});
 });
-
-
-
 console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);

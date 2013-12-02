@@ -1,16 +1,32 @@
 <html>
-<head>
-<title>NOTIFICATIONS:</title>
-</head>
-
 <body>
+<h1 style = font-size:30px>
+<%= title %>
+</h1>
+<script src = '/socket.io/socket.io.js'></script>
+<script> 
+  var socket = io.connect();
+  socket.on('connect', function(data) {
+	console.log('hello');
+  });
+  socket.on('notify', function (data) {
+    socket.emit('reply', { type: 'NOTIFY' });
+  });
+  socket.on('notifyknow', function (data) {
+	setInterval(function(){
+	alert(Math.floor((Math.random()*10)+1)+' '+data.NOTIFICATION +' - 2:30 PM 12/2')},6000);
+  });
+</script>
+<p>
+
+</p>
 <ul>
-<li>time: now, type: friend request</li>
+	<% for(var i=0; i<Notifications.length; i++) { %>
+        <li>
+            <p>*<%= Notifications[i] %> </p>  
+        </li>
+    <% } %>
 </ul>
 </body>
-
 </html>
 
-
-
-      
