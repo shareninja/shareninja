@@ -1,0 +1,18 @@
+<div id="auth_form" class="clear">
+  <p id="pagetitle">
+    <h1>Add a friend below</h1>
+  </p>
+  <div id="contents" class="clear">
+  <form id="login" action="/userSearch/addFriend.js" method="post" class="box_effect">
+      <%- message('passError') %>
+      <div class="inputs">
+        <p><label for="add_friend">Enter a user's name to add them as a friend</label></p>
+        <p><input id="add_friend" type="text" name="username"
+                  size="30" placeholder="Friend's username"></p>
+        <p><input type="submit" class="newpost" value="Add Friend"><script</p>
+      </div>
+  </form>
+  <p>Current friends:<br> Chris Paika <br> Mayu Kudo <br> Emily Henricksen <p>
+  <p><%= title %><p>
+</div>
+</div>
