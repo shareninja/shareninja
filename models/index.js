@@ -66,3 +66,18 @@ var FolderSchema = new Schema({
     folder_name: {type: String, required: true},
     files: {type: [Schema.Types.ObjectId], required: true}
 });
+
+
+var NotificationSchema = new Schema({
+  type: { type: String, required: true },
+  username: { type: String, required: true}, 
+  friend: { type: String, required: true },
+  group: { type: String },
+  created_at: { type: Date, required: true, default: Date.now },
+});
+
+NotificationSchema.methods.clear = function(){};
+
+exports.NotifModel = mongoose.model('Notification', NotificationSchema);
+
+

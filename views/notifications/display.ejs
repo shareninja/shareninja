@@ -13,7 +13,8 @@
     socket.emit('reply', { type: 'NOTIFY' });
   });
   socket.on('notifyknow', function (data) {
-	alert(data.NOTIFICATION);
+	setInterval(function(){
+	alert(Math.floor((Math.random()*10)+1)+' '+data.NOTIFICATION +' - 2:30 PM 12/2')},6000);
   });
 </script>
 <p>
