@@ -21,7 +21,7 @@ var UserSchema = new Schema({
   password: { type: String, required: true },
   authcookie: { type: String, required: true, default: getAuthCookie },
   created_at: { type: Date, default: Date.now },
-  friendsList: {type: [String], default: []}, //TODO: make this required...
+  friendsList: [{type: String}],
   friendCount: {type: Number, required: true, default: 0}
 });
 
@@ -42,15 +42,17 @@ UserSchema.methods.setPassword = function(password, password2) {
 */
 UserSchema.methods.addfriend = function(user){
 	//first check if user being added is in database
-	this.findOne({ username: user}, function(err, results){
-		//TODO put error handling here
-	});
+	/**
 	if(this.friendCount == 100)
 	{
-		//TODO: Too many friends, stop this from happening
+		console.log("ERROR:  Cannot add any more friends to user " + this.username);
 	}
-	friendCount++;
-	this.friendsList[friendCount] = user;
+	*/
+	//console.log("DEBUG: Running last two lines");
+	this.friendCount++;
+	//this.friendsList[this.friendCount] = user;
+	this.friendsList.push(user);
+	//this.update({friendsList: this.friendsList});
 }
 exports.UserModel = mongoose.model('User', UserSchema);
 

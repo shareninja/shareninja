@@ -17,6 +17,7 @@ var express = require('express')
   , confirm = require('./routes/newPass/index.js')
   , socket_io = require('socket.io')
   , userSearch = require('./routes/userSearch/index.js')
+  , forum = require('./routes/forum/forum.js')
   , notifications = require('./routes/notifications/index.js')
   , http = require('http')
   , iohelp = require('./serverio/index.js')
@@ -96,6 +97,9 @@ app.get('/notifications', lib.loginRequired, notifications.show);
 
 //GET /userSearch
 app.get('/userSearch', userSearch.show);
+
+//GET /forum
+app.get('/forum', forum.show);
 
 // GET /sessions/thankyou
 app.get('/sessions/thankyou', thankyou.show);
