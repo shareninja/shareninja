@@ -129,25 +129,9 @@ app.get('/download/:file', file.download);
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 app.listen(3000);
-var io = socket_io.listen(app);
 
-io.sockets.on('connection', function (socket) {
-    socket.emit('notify', {message:'notification'});
-	socket.on('reply', function(data){ 
-		if(data.type == 'UPLOAD'){
-			socket.broadcast.emit('notifyknow',{NOTIFICATION: 'FILE HAS BEEN UPLOADED!'});
-			socket.emit('notifyknow',{NOTIFICATION: 'FILE HAS BEEN UPLOADED!'});
-			var notification = new Notification({
-				username: 'dave',
-				type:'UPLOAD',
-				group : Math.floor((Math.random()*10)+1)
-			});
-			//notification.save();	
-		}
-		if(data.type == 'NOTIFY'){
-			socket.broadcast.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
-			socket.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
-		}
-	});
+var io = socket_io.listen(app);
+io.sockets.on('connection', function(socket){
+	notifications.listen(socket);
 });
 console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);

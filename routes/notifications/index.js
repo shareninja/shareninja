@@ -9,12 +9,48 @@ var models = require('../../models')
 */
 
 exports.show = function(req, res) {
+  var notifs = new Array();
+  NotifModel.find({username:'dave'}, function(err, docs){
+		if (err)
+			throw err;
+		for (i=0;i<docs.length;i++)
+			notifs.push(docs[i]);
+	}); 
   res.render('notifications/display', {
     title: 'Notifications',
-	Notifications: ['Paika Uploaded a File! - 10:30PM 12/2','Nick Added you as a Friend! - 11:23AM 12/1', 'Emily Added you as a Friend! - 10:22AM 12/1']
-	
+	Notifications: notifs
 	});
 };
+
+exports.listen = function(socket){
+	socket.on('reply', function(data){ 
+		if(data.type == 'UPLOAD'){
+			
+			var notification = new NotifModel({
+				username: 'dave',
+				type:'UPLOAD',
+			});
+			notification.save(function(err, model){
+				if(err)
+					throw err;
+			});
+			socket.emit('notifyknow',{notification: 'NOTIFICATION: File Uploaded!'});
+			}
+		if(data.type == 'FRIEND'){
+			socket.broadcast.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
+			socket.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
+			var notification = new NotifModel({
+				username: 'dave',
+				type:'FRIEND',
+			});
+			notification.save(function(err, model){
+				if(err)
+					throw err;
+			});
+			
+		}
+	});
+	}
 
 
 

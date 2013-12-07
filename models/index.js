@@ -71,9 +71,8 @@ var FolderSchema = new Schema({
 var NotificationSchema = new Schema({
   type: { type: String, required: true },
   username: { type: String, required: true}, 
-  friend: { type: String, required: true },
   group: { type: String },
-  created_at: { type: Date, required: true, default: Date.now },
+  created_at: { type: Date, required: true, default: Date.now }
 });
 
 NotificationSchema.methods.clear = function(){};
