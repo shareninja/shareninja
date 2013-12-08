@@ -65,8 +65,8 @@ var FileSchema = new Schema({
 exports.FileModel = mongoose.model('File', FileSchema);
 
 var FolderSchema = new Schema({
-    folder_name: {type: String, required: true, default : 'misc'},
-    files: {type: [String], required: true}
+    folder_name: {type: String, required: true},
+    files: {type: [Schema.Types.ObjectId], required: true}
 });
 
 

@@ -6,6 +6,7 @@
     <script src="/javascripts/upload.js"></script>
     <script src ="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" type="text/css" href="/stylesheets/upload.css">
+	<script src ="/socket.io/socket.io.js"></script>
 </head>
 <body>
 <form action="/upload" enctype="multipart/form-data" method="post">
@@ -14,6 +15,12 @@
     <select name="folder" id="folder">
         <option value="misc">--Choose Folder--</option>
         <option value="folder_name">Folder Name</option>
+</form>
+<div id="picker">
+    <select name="share" id="friend_chooser" multiple="multiple">
+        <optgroup label="Users">
+            <option class="fg" value="user-1">User 1</option>
+        </optgroup>
     </select>
 </form>
 <ul id="file_uploader">

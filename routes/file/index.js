@@ -22,7 +22,6 @@ exports.download = function(req, res){
 			var abspath = result.filepath;
 			var base = path.basename(abspath);
 			var dir = {root : path.dirname(abspath)};
-			var id = result._id;
 			res.attachment(name);
 			res.sendfile(base, dir);
 		}else{

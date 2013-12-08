@@ -1,37 +1,5 @@
 ##CS326 Share Ninja
 Emily Henriksen, Nick Hirakawa, David Itkin, Mayu Kudo, Christopher B. Paika
-----------
-+ app.js -> File to execute the application
-documents/
-  Docker documents for each js file
-lib/
-+ index.js -> Implementing custom errors/dynamicHelpers/loginRequired etc
-models/
-+ index.js -> Connection handlers/models for MongoDB using mongoose
-package.json -> Sets all dependencies
-public/
-  images/
-  javascripts/
-  stylesheets/
-     + style.css -> Stylesheet for this repo
-routes/
-  + index.js -> Retrives ./topics and exports
-  menu/
-  sessions/
-  + index.js -> Sessions for log-in, log-out, and creat a new user
-  topics/
-  + index.js -> Redirects to top page
-  users/
-  + index.js -> Create a new user with corresponding messages
-views/
-  + errors.ejs -> If error object was a NotFound instance, renders err.ejs, else pass it to next error handler
-  + index.ejs -> Index which shows the 'welcome to title' message
-  + layout.ejs -> Layout of the main website
-  + err.ejs -> Layout of the error page
-  sessions/
-  + new.ejs -> Layout of the signup/login page
-  topics/
-  + index.ejs -> Main menu bar
 
 ## Before compiling
 1) Download a zipfile

@@ -1,1 +1,0 @@
-var tree={"files":["index.js"],"dirs":{"lib":{"files":["index.js"]},"newPass":{"files":["index.js"]},"sessions":{"files":["index.js","thankyou.js"]},"topics":{"files":["index.js","profile.js"]},"users":{"files":["index.js"]}}};

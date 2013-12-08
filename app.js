@@ -81,8 +81,11 @@ app.get('/', lib.loginRequired, routes.index);
 // GET /topics
 app.get('/topics', lib.loginRequired, index.show);
 
-// GET /topics
+// GET /profile
 app.get('/topics/profile', lib.loginRequired, profile.show);
+
+// GEt /deleteAccount
+app.get('/topics/deleteAccount', lib.loginRequired, profile.deleteShow);
 
 // GET /topics/changePassword
 app.get('/lib/changePassword', lib.loginRequired, change.changePassword);
@@ -116,6 +119,9 @@ app.post('/users', users.create);
 
 // POST /lib
 app.post('/lib', change.checkOldPassword);
+
+// POST /delete
+app.post('/delete', profile.deleteAccount);
 
 // POST /newPass
 app.post('/newPass', confirm.changeToNewPassword);
