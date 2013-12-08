@@ -12,9 +12,6 @@
 <form action="/upload" enctype="multipart/form-data" method="post">
     <input type="file" name="user_file"/>
     <input type="submit" value="Upload"/>
-    <select name="folder" id="folder">
-        <option value="misc">--Choose Folder--</option>
-        <option value="folder_name">Folder Name</option>
 </form>
 <div id="picker">
     <select name="share" id="friend_chooser" multiple="multiple">
@@ -22,7 +19,7 @@
             <option class="fg" value="user-1">User 1</option>
         </optgroup>
     </select>
-</form>
+</div>
 <ul id="file_uploader">
     <li>
     <div id="picker">
