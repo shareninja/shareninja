@@ -23,7 +23,7 @@ exports.show = function(req, res) {
 };
 
 exports.listen = function(socket){
-	socket.on('reply', function(data){ 
+	socket.on('notification', function(data){ 
 		if(data.type == 'UPLOAD'){
 			
 			var notification = new NotifModel({
@@ -33,9 +33,8 @@ exports.listen = function(socket){
 			notification.save(function(err, model){
 				if(err)
 					throw err;
-			});
-			socket.emit('notifyknow',{notification: 'NOTIFICATION: File Uploaded!'});
-			}
+		});
+		}
 		if(data.type == 'FRIEND'){
 			socket.broadcast.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
 			socket.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
@@ -50,7 +49,7 @@ exports.listen = function(socket){
 			
 		}
 	});
-	}
+	};
 
 
 

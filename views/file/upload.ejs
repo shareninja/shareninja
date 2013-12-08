@@ -4,11 +4,12 @@
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/javascripts/upload.js"></script>
-	<script src ="/socket.io/socket.io.js"></script>
-	<script src="../../public/javascripts/clientupload.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/clientupload.js"></script>
 </head>
-<body>
-<form action="/upload" enctype="multipart/form-data" method="post" onsubmit="onload()">
+<body onload = "init()">
+
+<form action="/upload" enctype="multipart/form-data" method="post" onsubmit="emit()">
     <input type="file" name="user_file"/>
     <input type="submit" value="Upload"/>
 </form>

@@ -1,14 +1,13 @@
 //Written by David Itkin
 //handles clientside socket logic for uploading notifications
-function onload(){
-		var socket = io.connect();
-		
+var socket = io.connect();
+function init(){
 		socket.on('connect', function(data) {
-			alert('yea');
-			socket.emit('reply', {type:'UPLOAD'});
+			alert('ready and waiting');
 		});
 		
-		socket.on('notifyknow', function (data) {
-			alert(data.notification);
-		});
 };
+function emit(){
+	alert('Notification: File has been uploaded!');
+	socket.emit('notification', {type: 'UPLOAD'}):
+}
