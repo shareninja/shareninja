@@ -120,10 +120,10 @@ app.post('/lib', change.checkOldPassword);
 // POST /newPass
 app.post('/newPass', confirm.changeToNewPassword);
 
-app.get('/upload', file.upload);
+app.get('/upload', lib.loginRequired, file.upload);
 app.post('/upload', file.post);
-
-app.get('/download/:file', file.download);
+app.get('/download/:file', lib.loginRequired, file.download);
+app.get('/folder/:id', lib.loginRequired, file.folder);
 
 // Error Handler
 app.error(lib.notFoundHandler);

@@ -53,3 +53,7 @@ exports.post = function(req, res){
 	});
 	res.redirect('/upload');
 };
+
+exports.folder = function(req, res){
+	var folder_name = req.params.folder;
+};
