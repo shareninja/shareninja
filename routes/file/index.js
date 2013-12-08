@@ -4,7 +4,9 @@
 
 var path = require('path'),
 	models = require('../../models'),
-	File = models.FileModel
+	File = models.FileModel,
+	Folder = models.FolderModel,
+	User = models.UserModel
 	;
 
 exports.download = function(req, res){
@@ -52,4 +54,20 @@ exports.post = function(req, res){
 		}
 	});
 	res.redirect('/upload');
+};
+
+exports.folder = function(req, res){
+	var username = req.session.username;
+	User.findOne({username: username}, function(err, result){
+		if(err){
+			console.log(err);
+		}
+		if(result){
+			console.log('user found');
+			var folders = result.folders;
+			console.log(folders);
+		}else{
+			console.log('user not found');
+		}
+	});
 };

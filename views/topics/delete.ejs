@@ -1,0 +1,34 @@
+<div id="auth_form" class="clear">
+  <p id="pagetitle">
+    <h1><%= title %></h1>
+  </p>
+  <div id="contents" class="clear">
+  <section class="box_effect">
+      <div>
+        <b>Are yousure you want to delete your account?</b><br><br>
+        <b>YES</b><br>
+        <form id="login" action="/delete" method="post" class="box_effect">
+        <div class="inputs">
+          <p><label for="delete_username">username</label></p>
+          <p><input id="delete_username" type="text" name="username"
+                    size="30" placeholder="username"></p>
+          <p><label for="delete_password">password</label></p>
+          <p><input id="delete_password" type="password" name="password"
+                    size="30" placeholder="password"></p>
+          <p>
+            <label for="login_rememberme">remember me</label>
+            <input id="login_rememberme" type="checkbox" name="rememberme">
+          </p>
+          <p><input type="submit" class="newpost" value="Delete"></p>
+        </div>
+        </form>
+      </div><br><br>
+      <div>
+        <b>NO</b><br>
+        <a href="/topics/profile">Go back to profile setting</a>
+      </div>
+  </section>
+  <p class="move_top"><a href="#wrap">move top</a></p>
+</div>
+
+</div>

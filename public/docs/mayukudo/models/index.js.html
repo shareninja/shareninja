@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "models/index.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>index.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">utils</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">).</span><span class="nx">utils</span>
+  <span class="p">;</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">&#39;mongodb://&#39;</span> <span class="o">+</span> <span class="nx">host</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nx">db</span><span class="p">);</span>
+<span class="p">};</span>
+
+
+<span class="kd">var</span> <span class="nx">Schema</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span>
+  <span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">getAuthCookie</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">uid</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getAuthCookie</span> <span class="o">=</span> <span class="nx">getAuthCookie</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">UserSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schema</span><span class="p">({</span>
+  <span class="nx">username</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">unique</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
+  <span class="nx">password</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
+  <span class="nx">authcookie</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="k">default</span><span class="o">:</span> <span class="nx">getAuthCookie</span> <span class="p">},</span>
+  <span class="nx">created_at</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="p">,</span> <span class="k">default</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span> <span class="p">},</span>
+  <span class="nx">friendsList</span><span class="o">:</span> <span class="p">[{</span><span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">}],</span>
+  <span class="nx">friendCount</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="nb">Number</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="k">default</span><span class="o">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">UserSchema</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">setPassword</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">password2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">password</span> <span class="o">===</span> <span class="nx">password2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">password</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">invalidate</span><span class="p">(</span><span class="s1">&#39;password_mismatch&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Password mismatched&#39;</span><span class="p">));</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Adds a friend to the user's friend list.
+TODO: make it so when a friend is added a notification is created, and the other friends the other
+TODO:  Maybe make a friend request system? Blech</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">UserSchema</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">addfriend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>first check if user being added is in database</p>
+
+<div class="dox">
+  <div class="summary"><p>if(this.friendCount == 100)
+{
+console.log("ERROR:  Cannot add any more friends to user " + this.username);
+}</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+
+<p>console.log("DEBUG: Running last two lines");</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="k">this</span><span class="p">.</span><span class="nx">friendCount</span><span class="o">++</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>this.friendsList[this.friendCount] = user;</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="k">this</span><span class="p">.</span><span class="nx">friendsList</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>this.update({friendsList: this.friendsList});</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="p">}</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">UserModel</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="nx">UserSchema</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">FileSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schema</span><span class="p">({</span>
+    <span class="nx">filename</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span>
+    <span class="nx">filepath</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">unique</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span>
+    <span class="nx">uploaded_date</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="k">default</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">FileModel</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;File&#39;</span><span class="p">,</span> <span class="nx">FileSchema</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">FolderSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schema</span><span class="p">({</span>
+    <span class="nx">folder_name</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span>
+    <span class="nx">files</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="p">[</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">],</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">}</span>
+<span class="p">});</span>
+
+
+<span class="kd">var</span> <span class="nx">NotificationSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schema</span><span class="p">({</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
+  <span class="nx">username</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> 
+  <span class="nx">friend</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
+  <span class="nx">group</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span> <span class="p">},</span>
+  <span class="nx">created_at</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="p">,</span> <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="k">default</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">NotificationSchema</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">clear</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">NotifModel</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Notification&#39;</span><span class="p">,</span> <span class="nx">NotificationSchema</span><span class="p">);</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

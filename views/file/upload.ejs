@@ -4,42 +4,44 @@
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/javascripts/upload.js"></script>
+    <script src ="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/upload.css">
 	<script src ="/socket.io/socket.io.js"></script>
 </head>
 <body>
 <form action="/upload" enctype="multipart/form-data" method="post">
     <input type="file" name="user_file"/>
     <input type="submit" value="Upload"/>
-	
-	<script>
-		var socket = io.connect();
-		socket.on('connect', function(data) {
-			console.log(data);
-		});
-		socket.on('notify', function (data) {
-			socket.emit('reply', { type:'UPLOAD' });
-		});
-		socket.on('notifyknow', function (data) {
-		});
-		
-	</script>
+    <select name="folder" id="folder">
+        <option value="misc">--Choose Folder--</option>
+        <option value="folder_name">Folder Name</option>
 </form>
 <div id="picker">
     <select name="share" id="friend_chooser" multiple="multiple">
         <optgroup label="Users">
             <option class="fg" value="user-1">User 1</option>
         </optgroup>
-        <optgroup label="Groups">
-            <option class="fg" value="group-1">Group 1</option>
-        </optgroup>
     </select>
-    <div id="button-group">
-        <button id="right">>></button>
+</form>
+<ul id="file_uploader">
+    <li>
+    <div id="picker">
+        <select name="share" id="friend_chooser" multiple="multiple">
+            <optgroup label="Friends">
+                <option class="fg" value="user-1">User 1</option>
+            </optgroup>
+        </select>
+        <div id="button-group">
+            <button id="right">>></button>
+        </div>
     </div>
-</div>
-<div id="choices">
-    <select id="targets" multiple="multiple"></select>
-    <button id="left"><<</button>
-</div>
+    </li>
+    <li>
+    <div id="choices">
+        <select id="targets" multiple="multiple"></select>
+        <button id="left"><<</button>
+    </div>
+    </li>
+</ul>
 </body>
 </html>
