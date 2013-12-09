@@ -8,16 +8,16 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/upload.css">
 </head>
 <body>
-<form action="/upload" enctype="multipart/form-data" method="post">
-    <input type="file" name="user_file"/>
-    <input type="submit" value="Upload"/>
+<form id="file_chooser" action="/upload" enctype="multipart/form-data" method="post">
+    <input id="special" type="file" name="user_file"/>
+    <input class="submit" type="submit" value="Upload"/>
 </form>
 <ul id="file_uploader">
     <li>
         <div id="picker">
             <select name="share" id="friend_chooser" multiple="multiple">
                 <optgroup label="Friends">
-                    <option class="friends" value="user-1">User 1</option>
+                    <option class="friends" value="user-1">user-1</option>
                 </optgroup>
             </select>
         </div>
