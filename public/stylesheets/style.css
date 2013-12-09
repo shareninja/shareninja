@@ -184,19 +184,15 @@ body {
   position: absolute;
 }
 
-#firstFile{
-  text-indent: 25px;
-  display: table-cell;
-}
-
 #blank{
   color: white;
   display: table-cell;
 }
 
-#secondFile{  
-  text-indent: 25px;
-  display: table-cell;}
+.file{
+    text-indent: 25px;
+    display: table-cell;
+}
 
 
 #wrap {
