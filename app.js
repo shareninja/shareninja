@@ -20,7 +20,7 @@ var express = require('express')
   , forum = require('./routes/forum/forum.js')
   , notifications = require('./routes/notifications/index.js')
   , http = require('http')
-  , iohelp = require('./serverio/index.js')
+  , serverio = require('./serverio/index.js')
   , Notification = models.NotifModel
   ;
 var app = module.exports = express.createServer();
@@ -140,6 +140,6 @@ app.listen(3000);
 
 var io = socket_io.listen(app);
 io.sockets.on('connection', function(socket){
-	notifications.listen(socket);
+	serverio.listen(socket);
 });
 console.log("Express server listening on port %d in %s mode", '3000', app.settings.env);
