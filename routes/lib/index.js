@@ -17,7 +17,7 @@ var util = require('util')
 exports.checkOldPassword = function(req, res, next) {
   // If old password matched with stored data, redirects to changeToNewPassword
   var condition = {
-    username: req.param('username'),
+    username: req.session.username,
     password: req.param('oldPassword')
   }
   User.findOne(condition, function(err, result) {
