@@ -19,12 +19,12 @@ exports.show = function(req, res) {
 }); 
 };
 
-exports.listen = function(socket, req){
+exports.listen = function(socket){
 	socket.on('notification', function(data){ 
 		if(data.type == 'UPLOAD'){
 			var notification = new NotifModel({
 				username: 'you',
-				type:'UPLOAD',
+				type:'UPLOAD'
 			});
 			notification.save(function(err, model){
 				if(err)
@@ -33,8 +33,8 @@ exports.listen = function(socket, req){
 		}
 		if(data.type == 'FRIEND'){
 			var notification = new NotifModel({
-				username: 'you,
-				type:'FRIEND',
+				username: 'you',
+				type:'FRIEND'
 			});
 			notification.save(function(err, model){
 				if(err)

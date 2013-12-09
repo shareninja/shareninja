@@ -81,8 +81,11 @@ app.get('/', lib.loginRequired, routes.index);
 // GET /topics
 app.get('/topics', lib.loginRequired, index.show);
 
-// GET /topics
+// GET /profile
 app.get('/topics/profile', lib.loginRequired, profile.show);
+
+// GEt /deleteAccount
+app.get('/topics/deleteAccount', lib.loginRequired, profile.deleteShow);
 
 // GET /topics/changePassword
 app.get('/lib/changePassword', lib.loginRequired, change.changePassword);
@@ -117,18 +120,23 @@ app.post('/users', users.create);
 // POST /lib
 app.post('/lib', change.checkOldPassword);
 
+// POST /delete
+app.post('/delete', profile.deleteAccount);
+
 // POST /newPass
 app.post('/newPass', confirm.changeToNewPassword);
 
-app.get('/upload', file.upload);
+app.get('/upload', lib.loginRequired, file.upload);
 app.post('/upload', file.post);
-
-app.get('/download/:file', file.download);
+app.get('/download/:file', lib.loginRequired, file.download);
+app.get('/folder/:id', lib.loginRequired, file.folder);
 
 // Error Handler
 app.error(lib.notFoundHandler);
 app.error(lib.errorHandler);
 app.listen(3000);
+
+//serverside socket setup
 
 var io = socket_io.listen(app);
 io.sockets.on('connection', function(socket){

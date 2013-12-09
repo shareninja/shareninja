@@ -7,9 +7,11 @@
 <ul>
 	
 	<% for(var i=Notifications.length-1; i>=Math.max(0,Notifications.length-10); i--) { %>
-        <li>
-            <p>* You got: <%= Notifications[i].type %> notification from
-			<%= Notifications[i].username %> at <%= Notifications[i].created_at %> </p>  
+        <li >
+            <p> * You got: 
+			<%= Notifications[i].type %> 
+			notification at 
+			<%= Notifications[i].created_at %> </p>  
         </li>
     <% } %>
 </ul>
