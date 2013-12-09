@@ -9,7 +9,7 @@ var models = require('../../models')
 */
 
 exports.show = function(req, res) {
-  NotifModel.find({username:'dave'}, function(err, docs){
+  NotifModel.find({username:'you'}, function(err, docs){
 		if (err)
 			throw err;	
   res.render('notifications/display', {
@@ -19,11 +19,11 @@ exports.show = function(req, res) {
 }); 
 };
 
-exports.listen = function(socket){
+exports.listen = function(socket, req){
 	socket.on('notification', function(data){ 
 		if(data.type == 'UPLOAD'){
 			var notification = new NotifModel({
-				username: 'dave',
+				username: 'you',
 				type:'UPLOAD',
 			});
 			notification.save(function(err, model){
@@ -33,7 +33,7 @@ exports.listen = function(socket){
 		}
 		if(data.type == 'FRIEND'){
 			var notification = new NotifModel({
-				username: 'dave',
+				username: 'you,
 				type:'FRIEND',
 			});
 			notification.save(function(err, model){
