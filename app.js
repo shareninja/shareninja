@@ -126,6 +126,12 @@ app.post('/delete', profile.deleteAccount);
 // POST /newPass
 app.post('/newPass', confirm.changeToNewPassword);
 
+//POST /addMsg
+app.post('/addMsg', forum.addMessage);
+
+//POST /addFriend
+app.post('/addFriend', userSearch.addFriend);
+
 app.get('/upload', lib.loginRequired, file.upload);
 app.post('/upload', file.post);
 app.get('/download/:file', lib.loginRequired, file.download);
