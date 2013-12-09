@@ -1,31 +1,34 @@
 <div id="auth_form" class="clear">
-  <p id="pagetitle">
+    <p id="pagetitle">
     <h1><%= title %></h1>
-  </p>
-<div id="files_and_lists">
-    <div class="fileImage">
-        <a href="/download/<%=files[0].filename%>"><img border="0" src="../doc.jpg" width="100" height="100" position="top">
-        <div id="firstFile"><%=files[0].filename%></div></a>
-        <div id="blank"> blank </div>
+    </p>
+    <div id="files_and_lists">
+        <div class="fileImage">
+            <%for(var i = 0; i < files.length; i++){%>
+            <a href="/download/<%=files[i].filename%>">
+                <img border="0" src="../doc.jpg" width="100" width="100" position="top">
+                <div class="file" id="file<%=i%>"><%=files[i].filename%></div>
+            </a>
+            <%}%>
+        </div>
+        <div class="friends_groups_list">
+            <ul>
+                <li><div id="Title">Friends</div></li>
+                <li><div id="list_content">Mayu Kudo</div></li>
+                <li><div id="list_content">Nick Hawwaawawa</div></li>
+                <li><div id="list_content">Chris Paika</div></li>
+                <li><div id="list_content">David Itkin</div></li>
+
+                <li><div id="blankSpace"> blank</div></li>
+                <li><a href="userSearch"><div id="List">Add Friend</div></a></li>
+                <li><div id="blankSpace"> blank</div></li>
+
+                <li><div id="Title">Groups</div></li>
+                <li><div id="list_content">JSNinja</div></li>
+
+                <li><div id="blankSpace"> blank</div></li>
+                <li><a href="userSearch"><div id="List">Create Group</div></a></li>
+            </ul>
+        </div>
     </div>
-    <div class="friends_groups_list">
-        <ul>
-            <li><div id="Title">Friends</div></li>
-            <li><div id="list_content">Mayu Kudo</div></li>
-            <li><div id="list_content">Nick Hawwaawawa</div></li>
-            <li><div id="list_content">Chris Paika</div></li>
-            <li><div id="list_content">David Itkin</div></li>
-
-            <li><div id="blankSpace"> blank</div></li>
-            <li><a href="userSearch"><div id="List">Add Friend</div></a></li>
-            <li><div id="blankSpace"> blank</div></li>
-
-            <li><div id="Title">Groups</div></li>
-           <li><div id="list_content">JSNinja</div></li>
-
-           <li><div id="blankSpace"> blank</div></li>
-           <li><a href="userSearch"><div id="List">Create Group</div></a></li>
-         </ul>
-    </div>
-</div>
 </div>
