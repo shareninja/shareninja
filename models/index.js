@@ -22,8 +22,8 @@ var UserSchema = new Schema({
 	authcookie: { type: String, required: true, default: getAuthCookie },
 	created_at: { type: Date, default: Date.now },
 	friendsList: [{type: String}],
-	friendCount: {type: Number, required: true, default: 0},
-	files : {type : [Schema.Types.ObjectId], required: true}
+	friendCount: {type: Number, required: true, default: 0}
+	,files : {type : [FileSchema], required: true, default : []}
 });
 
 UserSchema.methods.setPassword = function(password, password2) {
@@ -35,9 +35,11 @@ UserSchema.methods.setPassword = function(password, password2) {
 	return false;
 };
 
-UserSchema.methods.addFile = function(fid){
-	this.files.push(fid);
-};
+/*
+ UserSchema.methods.addFile = function(fid){
+ this.files.push(fid);
+ };
+ */
 
 
 /*

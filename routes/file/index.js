@@ -5,27 +5,33 @@
 var path = require('path'),
 	models = require('../../models'),
 	File = models.FileModel,
-	Folder = models.FolderModel,
 	User = models.UserModel
 	;
 
 exports.download = function(req, res){
 	var filename = req.params.file;
-	console.log(filename);
-	File.findOne({filename: filename}, function(err, result){
+	var username = req.session.username;
+	User.find({username : username}, function(err, result){
 		if(err){
 			console.log(err);
 		}
 		if(result){
+			console.log('found user');
 			console.log(result);
-			var name = result.filename;
-			var abspath = result.filepath;
-			var base = path.basename(abspath);
-			var dir = {root : path.dirname(abspath)};
-			res.attachment(name);
+			var files = result[0].files;
+			console.log(files);
+			var f = null;
+			for(var i = 0; i < files.length; i++){
+				if(files[i].filename == filename){
+					f = files[i];
+				}
+			}
+			var base = path.basename(f.filepath);
+			var dir = {root : path.dirname(f.filepath)};
+			res.attachment(f.filename);
 			res.sendfile(base, dir);
 		}else{
-			console.log('file not found...');
+			console.log('file not found');
 		}
 	});
 };
@@ -40,34 +46,33 @@ exports.post = function(req, res){
 	var name = f.name;
 	console.log('path: ', path);
 	console.log('name: ', name);
+	var username = req.session.username;
+	console.log(username);
 	var file = new File({
 		filename : name,
 		filepath : path
 	});
-	file.save(function(err, result){
-		if(err){
-			console.log(err);
-		}
-		if(result){
-			console.log('file saved');
-			//console.log(result);
-		}
-	});
+	User.update({username : username},
+		{$push : {files : file}},
+		function(err, result){
+			if(err){
+				console.log(err);
+			}
+			if(result){
+				console.log(result);
+			}
+		});
 	res.redirect('/upload');
 };
 
-exports.folder = function(req, res){
-	var username = req.session.username;
-	User.findOne({username: username}, function(err, result){
+exports.test = function(req, res){
+	var user = req.session.username;
+	User.findOne({username : user}, function(err, result){
 		if(err){
 			console.log(err);
 		}
 		if(result){
-			console.log('user found');
-			var folders = result.folders;
-			console.log(folders);
-		}else{
-			console.log('user not found');
+			console.log('files: ' , result.files);
 		}
 	});
 };
