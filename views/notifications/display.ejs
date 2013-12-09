@@ -3,27 +3,13 @@
 <h1 style = font-size:30px>
 <%= title %>
 </h1>
-<script src = '/socket.io/socket.io.js'></script>
-<script> 
-  var socket = io.connect();
-  socket.on('connect', function(data) {
-	console.log('hello');
-  });
-  socket.on('notify', function (data) {
-    socket.emit('reply', { type: 'NOTIFY' });
-  });
-  socket.on('notifyknow', function (data) {
-	setInterval(function(){
-	alert(Math.floor((Math.random()*10)+1)+' '+data.NOTIFICATION +' - 2:30 PM 12/2')},6000);
-  });
-</script>
-<p>
 
-</p>
 <ul>
-	<% for(var i=0; i<Notifications.length; i++) { %>
+	
+	<% for(var i=Notifications.length-1; i>=Math.max(0,Notifications.length-10); i--) { %>
         <li>
-            <p>*<%= Notifications[i] %> </p>  
+            <p>* You got: <%= Notifications[i].type %> notification from
+			<%= Notifications[i].username %> at <%= Notifications[i].created_at %> </p>  
         </li>
     <% } %>
 </ul>

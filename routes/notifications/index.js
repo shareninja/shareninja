@@ -9,23 +9,19 @@ var models = require('../../models')
 */
 
 exports.show = function(req, res) {
-  var notifs = new Array();
   NotifModel.find({username:'dave'}, function(err, docs){
 		if (err)
-			throw err;
-		for (i=0;i<docs.length;i++)
-			notifs.push(docs[i]);
-	}); 
+			throw err;	
   res.render('notifications/display', {
     title: 'Notifications',
-	Notifications: notifs
+	Notifications: docs
 	});
+}); 
 };
 
 exports.listen = function(socket){
 	socket.on('notification', function(data){ 
 		if(data.type == 'UPLOAD'){
-			
 			var notification = new NotifModel({
 				username: 'dave',
 				type:'UPLOAD',
@@ -36,8 +32,6 @@ exports.listen = function(socket){
 		});
 		}
 		if(data.type == 'FRIEND'){
-			socket.broadcast.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
-			socket.emit('notifyknow',{NOTIFICATION: 'NOTIFICATION SENT!'});
 			var notification = new NotifModel({
 				username: 'dave',
 				type:'FRIEND',
@@ -46,7 +40,6 @@ exports.listen = function(socket){
 				if(err)
 					throw err;
 			});
-			
 		}
 	});
 	};
