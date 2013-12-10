@@ -1,3 +1,5 @@
+//Written by David Itkin - Serverside sockets code that handles all notifications type
+
 var models = require('../models')
   , NotifModel = models.NotifModel
   ;
@@ -34,7 +36,7 @@ exports.listen = function(socket){
                         });
                 }
         });
-        };
+   };
 
 
 
