@@ -23,6 +23,16 @@ exports.listen = function(socket){
                                         throw err;
                         });
                 }
+				if(data.type == 'FORUM'){
+                        var notification = new NotifModel({
+                                username: 'you',
+                                type:'FORUM'
+                        });
+                        notification.save(function(err, model){
+                                if(err)
+                                        throw err;
+                        });
+                }
         });
         };
 

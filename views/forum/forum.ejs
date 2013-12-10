@@ -1,9 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/javascripts/upload.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/clientforum.js"></script>
+</head>
+<body onload = "init()">
 <div id="contents" class="clear">
   <p id="pagetitle">
     <h1>Message Board</h1>
   </p>
   <div id="contents" class="clear">
-  <form id="login" action="/addMsg" method="post" class="box_effect">
+  <form id="login" action="/addMsg" method="post" class="box_effect" onsubmit="emit()">
       <%- message('passError') %>
       <div class="inputs">
         <p><label for="add_friend">Post message below</label></p>
