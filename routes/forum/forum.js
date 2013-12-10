@@ -4,6 +4,10 @@ var models = require('../../models/forum.js')
   ;
 exports.addMessage = function(req, res, next)
 {
+	if(!req.body.theMsg)
+	{
+		return res.redirect('back');
+	}
 	var msg = new Message({username: req.session.username});
 	msg.message = req.body.theMsg;
 	msg.save(function(err, results)
