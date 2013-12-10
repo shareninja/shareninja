@@ -21,9 +21,9 @@ var UserSchema = new Schema({
 	password: { type: String, required: true },
 	authcookie: { type: String, required: true, default: getAuthCookie },
 	created_at: { type: Date, default: Date.now },
-	friendsList: [{type: String}],
+	friendsList: {type : [Schema.Types.ObjectId], default : []},
 	friendCount: {type: Number, required: true, default: 0}
-	,files : {type : [FileSchema], required: true, default : []}
+	,files : {type : [FileSchema], default : []}
 });
 
 UserSchema.methods.setPassword = function(password, password2) {
